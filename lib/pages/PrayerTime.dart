@@ -1,5 +1,4 @@
 import 'package:universal_app/config/imports.dart';
-import 'package:universal_app/stores/home_controller.dart';
 
 class PrayerTime extends StatefulWidget {
   const PrayerTime({super.key});
@@ -11,7 +10,7 @@ class PrayerTime extends StatefulWidget {
 class _PrayerTimeState extends State<PrayerTime> {
   HomeController controller = Get.put(HomeController());
   List times = [];
-  filterTime(data) {
+  filterTime( data) {
     data.forEach((key, value) {
       times.add({"time": key, "hour": value});
     });
@@ -19,30 +18,22 @@ class _PrayerTimeState extends State<PrayerTime> {
 
   @override
   void initState() {
-    filterTime(controller.prayerTime['times']);
+    filterTime(controller.prayerTime!.times);
     super.initState();
   }
 
-  String filterText(String key) {
-    switch (key) {
-      case "tong_saharlik":
-        return "Bomdod namozi";
-      case "quyosh":
-        return "Quyosh";
-      case "peshin":
-        return "Peshin namozi";
-      case "asr":
-        return "Asr namozi";
-      case "shom_iftor":
-        return "Shom namozi";
-      case "hufton":
-        return "Xufton namozi";
+ 
+  Map<String, dynamic>keys = {
+    "tong_saharlik":"Bomdod namozi",
+    "quyosh":"Quyosh",
+    "peshin":"Peshin namozi",
+    "asr":"Asr namozi",
+    "shom_iftor":"Shom namozi",
+    "hufton":"Xufton namozi",
 
-      default:
-        return "";
-    }
-  }
-
+  };
+  filterText(String key){
+  return keys [key]??'';}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +47,8 @@ class _PrayerTimeState extends State<PrayerTime> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
-                Text(controller.prayerTime['date'], style: TextStyle(fontSize: 20, fontWeight:FontWeight.w600),),
-                Text(controller.prayerTime['weekday'], style: TextStyle(fontSize: 20, fontWeight:FontWeight.w600),),
+                Text(controller.prayerTime!.date, style: TextStyle(fontSize: 20, fontWeight:FontWeight.w600),),
+                Text(controller.prayerTime!.weekday, style: TextStyle(fontSize: 20, fontWeight:FontWeight.w600),),
               ],
 
               ),

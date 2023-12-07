@@ -1,9 +1,5 @@
-import 'package:universal_app/config/Colors.dart';
-import 'package:universal_app/config/images.dart';
+
 import 'package:universal_app/config/imports.dart';
-import 'package:universal_app/pages/Cities.dart';
-import 'package:universal_app/pages/Currencies.dart';
-import 'package:universal_app/stores/home_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               text: "Currency exchange table",
               subtitle: "You can be aware of current exchange rate",
               image: AppImages.money,
-              colors: [AppColors.red, AppColors.red],
+              colors: [AppColors.blue, AppColors.red],
               textColor: Colors.white,
               onTap: () {
                 Get.to(const currencies());
@@ -47,12 +43,24 @@ class _HomePageState extends State<HomePage> {
               icon: Icons.attach_money,
               text: "Prayer time",
               subtitle: "You can find out daily praying times for different regions",
-              image: AppImages.money,
-              colors: [AppColors.red, AppColors.red],
+              image: AppImages.masjid,
+              colors: [AppColors.blue, AppColors.red],
               textColor: Colors.white,
               onTap: () {
                 
                  Get.to(const cities());
+              },
+            ),
+            HomeButton(
+              icon: Icons.attach_money,
+              text: "Products",
+              subtitle: "The cheapest products for you",
+              image: AppImages.money,
+              colors: [AppColors.blue, AppColors.red],
+              textColor: Colors.white,
+              onTap: () {
+                
+                 Get.to(const Products   ());
               },
             ),
           ],
