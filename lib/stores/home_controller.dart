@@ -14,6 +14,7 @@ class HomeController extends GetxController {
 
   fetchCurrencies() async {
     try {
+      times =[];
       loading = true;
       update();
       var res = await http.get('https://cbu.uz/uz/arkhiv-kursov-valyut/json/');
@@ -43,15 +44,19 @@ class HomeController extends GetxController {
     "Qarshi",
     
   ];
-  late PrayerTimeModel?   prayerTime;
+   PrayerTimeModel?   prayerTime;
   String selectCity='';
   fetchPrayerTimes() async {
     loading=true;
     update();
+    Get.to(()=> const PrayerTime());
+    
     try {
+      
       var res = 
       await http.get('https://islomapi.uz/api/present/day?region=$selectCity');
           prayerTime = PrayerTimeModel.fromJson(res.data);
+          filterTime(prayerTime!.times);
           Get.to(()=> const PrayerTime());
     } catch (err) {
       print(err);
@@ -60,4 +65,28 @@ class HomeController extends GetxController {
     update();
     }
   }
+
+ Map<String, dynamic>keys = {
+    "tong_saharlik":"Bomdod namozi",
+    "quyosh":"Quyosh",
+    "peshin":"Peshin namozi",
+    "asr":"Asr namozi",
+    "shom_iftor":"Shom namozi",
+    "hufton":"Xufton namozi",
+
+  };
+  filterText(String key){
+  return keys [key]??'';}
+
+
+  List times = [];
+ filterTime( data) {
+    data.forEach((key, value) {
+      times.add({"time": key, "hour": value});
+    });
+  }
+
+
+
+
 }
